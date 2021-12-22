@@ -8,26 +8,26 @@ void snake::initGame() {
     BeginBatchDraw();
     cleardevice();
     setlinecolor(WHITE);
-    for (int i = SIZE; i < WIDTH * SIZE; i += SIZE)
-        line(i, 0, i, HEIGHT * SIZE);
-    for (int i = SIZE; i < HEIGHT * SIZE; i += SIZE)
-        line(0, i, WIDTH * SIZE, i);
+    for (int column_line = SIZE; columan_line< WIDTH * SIZE; column_line += SIZE)
+        line(column_line, 0, column_line, HEIGHT * SIZE);
+    for (int row_line = SIZE; row_line < HEIGHT * SIZE; row_line += SIZE)
+        line(0, row_line, WIDTH * SIZE, row_line);
     moveDirection = oldMoveDirection = 'd';
     Blocks[WIDTH / 2][HEIGHT / 2] = 1;
-    for (int i = 1; i < 4; i++)
-        Blocks[WIDTH / 2 - i][HEIGHT / 2] = i + 1;
-    foodX = rand() % (WIDTH - 2) + 1;//1到38
+    for (int snake_head = 1; snake_head < 4; snake_head++)
+        Blocks[WIDTH / 2 - snake_head][HEIGHT / 2] = snake_head + 1;
+    foodX = rand() % (WIDTH - 2) + 1;//1to38
     foodY = rand() % (HEIGHT - 2) + 1;
 }
 
 void snake::show() {
-    for (int i = 0; i < WIDTH; i++) {
-        for (int j = 0; j < HEIGHT; j++) {
-            if (Blocks[i][j] != 0)
-                setfillcolor(HSVtoRGB(Blocks[i][j] * 10, 0.9, 1));
+    for (int column = 0; column < WIDTH; column++) {
+        for (int row = 0; row < HEIGHT; row++) {
+            if (Blocks[column][row] != 0)
+                setfillcolor(HSVtoRGB(Blocks[column][row] * 10, 0.9, 1));
             else
                 setfillcolor(LIGHTGRAY);
-            fillrectangle(i * SIZE, j * SIZE, (i + 1) * SIZE, (j + 1) * SIZE);
+            fillrectangle(columan * SIZE, row * SIZE, (column + 1) * SIZE, (row + 1) * SIZE);
         }
     }
     setfillcolor(LIGHTGREEN);
@@ -75,21 +75,21 @@ void snake::updateWithoutInput() {
 
 void snake::moveSnake() {
     //update the snake body
-    for (int i = 0; i < WIDTH; i++)
-        for (int j = 0; j < HEIGHT; j++)
-            if (Blocks[i][j] != 0)
-                Blocks[i][j]++;
+    for (int column = 0; column < WIDTH; column++)
+        for (int row = 0; row < HEIGHT; row++)
+            if (Blocks[column][row] != 0)
+                Blocks[column][row]++;
     //Find the x,y coordinates of the old snake head and old snake tail
     int oldHeadX, oldHeadY, oldTailX, oldTailY;
     int tailBlocks = 0;
-    for (int i = 0; i < WIDTH; i++) {
-        for (int j = 0; j < HEIGHT; j++) {
-            if (tailBlocks < Blocks[i][j]) {
-                tailBlocks = Blocks[i][j];
-                oldTailX = i;
-                oldTailY = j;
+    for (int column = 0; column < WIDTH; column++) {
+        for (int row = 0; row < HEIGHT; row++) {
+            if (tailBlocks < Blocks[column][row]) {
+                tailBlocks = Blocks[column][row];
+                oldTailX = column;
+                oldTailY = row;
             }
-            if (Blocks[i][j] == 2) {
+            if (Blocks[column][row] == 2) {
                 oldHeadX = i;
                 oldHeadY = j;
             }
