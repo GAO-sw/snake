@@ -8,7 +8,7 @@ void snake::initGame() {
     BeginBatchDraw();
     cleardevice();
     setlinecolor(WHITE);
-    for (int column_line = SIZE; columan_line< WIDTH * SIZE; column_line += SIZE)
+    for (int column_line = SIZE; column_line< WIDTH * SIZE; column_line += SIZE)
         line(column_line, 0, column_line, HEIGHT * SIZE);
     for (int row_line = SIZE; row_line < HEIGHT * SIZE; row_line += SIZE)
         line(0, row_line, WIDTH * SIZE, row_line);
