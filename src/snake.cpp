@@ -10,11 +10,11 @@ void snake::initGame() {
     setlinecolor(WHITE);
     for (int i = SIZE; i < WIDTH * SIZE; i += SIZE)
         line(i, 0, i, HEIGHT * SIZE);
-    for (i = SIZE; i < HEIGHT * SIZE; i += SIZE)
+    for (int i = SIZE; i < HEIGHT * SIZE; i += SIZE)
         line(0, i, WIDTH * SIZE, i);
     moveDirection = oldMoveDirection = 'd';
     Blocks[WIDTH / 2][HEIGHT / 2] = 1;
-    for (i = 1; i < 4; i++)
+    for (int i = 1; i < 4; i++)
         Blocks[WIDTH / 2 - i][HEIGHT / 2] = i + 1;
     foodX = rand() % (WIDTH - 2) + 1;//1到38
     foodY = rand() % (HEIGHT - 2) + 1;
@@ -74,17 +74,16 @@ void snake::updateWithoutInput() {
 }
 
 void snake::moveSnake() {
-    int i, j;
     //update the snake body
-    for (i = 0; i < WIDTH; i++)
-        for (j = 0; j < HEIGHT; j++)
+    for (int i = 0; i < WIDTH; i++)
+        for (int j = 0; j < HEIGHT; j++)
             if (Blocks[i][j] != 0)
                 Blocks[i][j]++;
     //Find the x,y coordinates of the old snake head and old snake tail
     int oldHeadX, oldHeadY, oldTailX, oldTailY;
     int tailBlocks = 0;
-    for (i = 0; i < WIDTH; i++) {
-        for (j = 0; j < HEIGHT; j++) {
+    for (int i = 0; i < WIDTH; i++) {
+        for (int j = 0; j < HEIGHT; j++) {
             if (tailBlocks < Blocks[i][j]) {
                 tailBlocks = Blocks[i][j];
                 oldTailX = i;
