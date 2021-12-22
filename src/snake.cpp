@@ -1,6 +1,6 @@
 #include <graphics.h>
 #include <conio.h>
-#include "标头.h"
+#include "snake.h"
 
 void snake::initGame() {
     initgraph(WIDTH * SIZE, HEIGHT * SIZE);
@@ -8,8 +8,7 @@ void snake::initGame() {
     BeginBatchDraw();
     cleardevice();
     setlinecolor(WHITE);
-    int i;
-    for (i = SIZE; i < WIDTH * SIZE; i += SIZE)
+    for (int i = SIZE; i < WIDTH * SIZE; i += SIZE)
         line(i, 0, i, HEIGHT * SIZE);
     for (i = SIZE; i < HEIGHT * SIZE; i += SIZE)
         line(0, i, WIDTH * SIZE, i);
